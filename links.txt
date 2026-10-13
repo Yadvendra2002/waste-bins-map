@@ -1,0 +1,2 @@
+GitHub repository: https://github.com/Yadvendra2002/waste-bins-map
+Live interactive map: https://yadvendra2002.github.io/waste-bins-map/
