@@ -1,0 +1,2779 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_19db07f4e46dd912cf0aa80c0c073398 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    <div style="position:fixed;top:10px;left:50px;z-index:9999;background:#fff;padding:8px 14px;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.35);font-family:Arial;font-size:12px"><b style="font-size:15px">Waste-Bin Observations</b><br>Map by <b>Yadvendra Singh Yadav (CE25M414)</b> | 51 bins<hr style="margin:5px 0"><i class="fa fa-map-marker" style="color:#2e9e4f;font-size:14px"></i> Empty (12)<br><i class="fa fa-map-marker" style="color:#f39c12;font-size:14px"></i> Partially filled (14)<br><i class="fa fa-map-marker" style="color:#d63e2a;font-size:14px"></i> Filled (10)<br><i class="fa fa-map-marker" style="color:#7b1d12;font-size:14px"></i> Overfilled (5)<br><i class="fa fa-map-marker" style="color:#7f7f7f;font-size:14px"></i> Not recorded (10)<br><small>Click a bin to see its photo; click the photo for full screen.</small></div>
+    
+<div id="lb" onclick="this.style.display='none'"
+     style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);
+            z-index:100000;align-items:center;justify-content:center;
+            cursor:zoom-out">
+  <img id="lbimg" style="max-width:96vw;max-height:96vh;border-radius:6px">
+</div>
+<script>
+function showFull(s){
+  document.getElementById('lbimg').src = s;
+  document.getElementById('lb').style.display = 'flex';
+}
+</script>
+    
+            <div class="folium-map" id="map_19db07f4e46dd912cf0aa80c0c073398" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_19db07f4e46dd912cf0aa80c0c073398 = L.map(
+                "map_19db07f4e46dd912cf0aa80c0c073398",
+                {
+                    center: [13.712185138341722, 79.589901658366],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 17,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+
+            
+
+        
+    
+            var tile_layer_1c93375e8a014716b492a05961e5dca3 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1c93375e8a014716b492a05961e5dca3.addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+        
+    
+            var tile_layer_707db0f9041d6b6e705d8ce8a176cd70 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_707db0f9041d6b6e705d8ce8a176cd70.addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+        
+    
+            var tile_layer_1ce67564c4110453ce41c263f622931f = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri World Imagery",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1ce67564c4110453ce41c263f622931f.addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+        
+    
+            var feature_group_9db691c24bbabe777b0fc4cb6ee06940 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_4b40b6732faae4c56b5f36587d39692c = L.marker(
+                [13.714663333333332, 79.58644166666666],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_dda57fb42bd80f16ccf08691cf1ba2fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8f47a137ea7eda63272a586693122eb1 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_fe9fbfabdf0c7aee3fded6928a14e263 = $(`<div id="html_fe9fbfabdf0c7aee3fded6928a14e263" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Front of Tennis court</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-08-30 12:40:28 &nbsp; <b>Lat/Lon:</b> 13.714663, 79.586442</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_8f47a137ea7eda63272a586693122eb1.setContent(html_fe9fbfabdf0c7aee3fded6928a14e263);
+            
+        
+
+        marker_4b40b6732faae4c56b5f36587d39692c.bindPopup(popup_8f47a137ea7eda63272a586693122eb1)
+        ;
+
+        
+    
+    
+            marker_4b40b6732faae4c56b5f36587d39692c.bindTooltip(
+                `<div>
+                     <b>Front of Tennis court</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4b40b6732faae4c56b5f36587d39692c.setIcon(icon_dda57fb42bd80f16ccf08691cf1ba2fe);
+            
+    
+            var marker_a70eefad1d0621d80a5e5247b10ce9d9 = L.marker(
+                [13.714460000000003, 79.58601833333334],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_75548593b831d9ebdf109c20b8791dba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_83cffaf25fc9f0858139a128386a1bd0 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_e4d69e0e4a58b6908824b0dc469c2ef8 = $(`<div id="html_e4d69e0e4a58b6908824b0dc469c2ef8" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-12(near to court 1)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-08-30 12:44:33 &nbsp; <b>Lat/Lon:</b> 13.714460, 79.586018</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_83cffaf25fc9f0858139a128386a1bd0.setContent(html_e4d69e0e4a58b6908824b0dc469c2ef8);
+            
+        
+
+        marker_a70eefad1d0621d80a5e5247b10ce9d9.bindPopup(popup_83cffaf25fc9f0858139a128386a1bd0)
+        ;
+
+        
+    
+    
+            marker_a70eefad1d0621d80a5e5247b10ce9d9.bindTooltip(
+                `<div>
+                     <b>Dustbin-12(near to court 1)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a70eefad1d0621d80a5e5247b10ce9d9.setIcon(icon_75548593b831d9ebdf109c20b8791dba);
+            
+    
+            var marker_601308440a6adfa8d0487fdbf13ff43c = L.marker(
+                [13.714191666666665, 79.58606833333333],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_8ebac92ee61f35a4fef8eeac962c9417 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3a567df9a8c6b987b76ae9d7eb9d9f46 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_029c5e5056cd41df8f96a657b2f3727c = $(`<div id="html_029c5e5056cd41df8f96a657b2f3727c" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-12(between court 1&amp;2)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-08-30 12:45:58 &nbsp; <b>Lat/Lon:</b> 13.714192, 79.586068</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_3a567df9a8c6b987b76ae9d7eb9d9f46.setContent(html_029c5e5056cd41df8f96a657b2f3727c);
+            
+        
+
+        marker_601308440a6adfa8d0487fdbf13ff43c.bindPopup(popup_3a567df9a8c6b987b76ae9d7eb9d9f46)
+        ;
+
+        
+    
+    
+            marker_601308440a6adfa8d0487fdbf13ff43c.bindTooltip(
+                `<div>
+                     <b>Dustbin-12(between court 1&amp;2)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_601308440a6adfa8d0487fdbf13ff43c.setIcon(icon_8ebac92ee61f35a4fef8eeac962c9417);
+            
+    
+            var marker_5924b75491647fae8f50ba746e3fe4bf = L.marker(
+                [13.714006666666666, 79.58610833333334],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_8e0b6f11336898f244b8eaca8a15fdb3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cf73e45982f9d69fe369c97a186b9f79 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_20303a2c22bcef859cd18cfbae856b9a = $(`<div id="html_20303a2c22bcef859cd18cfbae856b9a" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-13(near to tennis court 2)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-08-30 12:47:31 &nbsp; <b>Lat/Lon:</b> 13.714007, 79.586108</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_cf73e45982f9d69fe369c97a186b9f79.setContent(html_20303a2c22bcef859cd18cfbae856b9a);
+            
+        
+
+        marker_5924b75491647fae8f50ba746e3fe4bf.bindPopup(popup_cf73e45982f9d69fe369c97a186b9f79)
+        ;
+
+        
+    
+    
+            marker_5924b75491647fae8f50ba746e3fe4bf.bindTooltip(
+                `<div>
+                     <b>Dustbin-13(near to tennis court 2)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5924b75491647fae8f50ba746e3fe4bf.setIcon(icon_8e0b6f11336898f244b8eaca8a15fdb3);
+            
+    
+            var marker_df55d8fabcc592c253e459833d27f147 = L.marker(
+                [13.712784999999997, 79.58811333333333],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_17f879895ec4f136e299204efc093d2f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_828dea120325368b88b4abc4a96a3c09 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_5eb2a18ebe32a98c6f57b17976305a38 = $(`<div id="html_5eb2a18ebe32a98c6f57b17976305a38" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-14(near to director building)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> No need (empty)<br><b>Time (UTC):</b> 2026-08-30 12:55:02 &nbsp; <b>Lat/Lon:</b> 13.712785, 79.588113</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_828dea120325368b88b4abc4a96a3c09.setContent(html_5eb2a18ebe32a98c6f57b17976305a38);
+            
+        
+
+        marker_df55d8fabcc592c253e459833d27f147.bindPopup(popup_828dea120325368b88b4abc4a96a3c09)
+        ;
+
+        
+    
+    
+            marker_df55d8fabcc592c253e459833d27f147.bindTooltip(
+                `<div>
+                     <b>Dustbin-14(near to director building)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_df55d8fabcc592c253e459833d27f147.setIcon(icon_17f879895ec4f136e299204efc093d2f);
+            
+    
+            var marker_254e158d7047e8c09acb5121afcd279d = L.marker(
+                [13.710048333333335, 79.59321166666668],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_5dc18f6efaeb43ba07135ad705ebfe94 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7b1e5bce45098dbfb9fc1675eba44038 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_51efec69a0973343605997a08720602c = $(`<div id="html_51efec69a0973343605997a08720602c" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-25(in front of sports complex)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-08-30 15:17:19 &nbsp; <b>Lat/Lon:</b> 13.710048, 79.593212</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_7b1e5bce45098dbfb9fc1675eba44038.setContent(html_51efec69a0973343605997a08720602c);
+            
+        
+
+        marker_254e158d7047e8c09acb5121afcd279d.bindPopup(popup_7b1e5bce45098dbfb9fc1675eba44038)
+        ;
+
+        
+    
+    
+            marker_254e158d7047e8c09acb5121afcd279d.bindTooltip(
+                `<div>
+                     <b>Dustbin-25(in front of sports complex)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_254e158d7047e8c09acb5121afcd279d.setIcon(icon_5dc18f6efaeb43ba07135ad705ebfe94);
+            
+    
+            var marker_62877c684acb7997f0b580ae97e36f81 = L.marker(
+                [13.70677444336461, 79.59340810652772],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_805f39a7aec4c8339ecb1b71858483be = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_276d71518e052674cb34104f6cfc1af0 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_67cc87e991d56f7a757db1e2174a1b37 = $(`<div id="html_67cc87e991d56f7a757db1e2174a1b37" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-28(in front of LHC)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-08-31 13:58:10 &nbsp; <b>Lat/Lon:</b> 13.706774, 79.593408</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_276d71518e052674cb34104f6cfc1af0.setContent(html_67cc87e991d56f7a757db1e2174a1b37);
+            
+        
+
+        marker_62877c684acb7997f0b580ae97e36f81.bindPopup(popup_276d71518e052674cb34104f6cfc1af0)
+        ;
+
+        
+    
+    
+            marker_62877c684acb7997f0b580ae97e36f81.bindTooltip(
+                `<div>
+                     <b>Dustbin-28(in front of LHC)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_62877c684acb7997f0b580ae97e36f81.setIcon(icon_805f39a7aec4c8339ecb1b71858483be);
+            
+    
+            var marker_428614355160c1c731df8f7ee54790d2 = L.marker(
+                [13.716903333333333, 79.59161999999998],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_2f9f1d637436831e670e3ae5f2faaa91 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9bb22b564973247fd388f2d54756426f = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_6145c1436e611099dc346c8c2784bea5 = $(`<div id="html_6145c1436e611099dc346c8c2784bea5" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-32(infront of TIH)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-08-31 14:44:11 &nbsp; <b>Lat/Lon:</b> 13.716903, 79.591620</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_9bb22b564973247fd388f2d54756426f.setContent(html_6145c1436e611099dc346c8c2784bea5);
+            
+        
+
+        marker_428614355160c1c731df8f7ee54790d2.bindPopup(popup_9bb22b564973247fd388f2d54756426f)
+        ;
+
+        
+    
+    
+            marker_428614355160c1c731df8f7ee54790d2.bindTooltip(
+                `<div>
+                     <b>Dustbin-32(infront of TIH)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_428614355160c1c731df8f7ee54790d2.setIcon(icon_2f9f1d637436831e670e3ae5f2faaa91);
+            
+    
+            var marker_47b9bfc65d394de8eba2a7b210dd829b = L.marker(
+                [13.710800530039728, 79.5908866830043],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_621f21e08ab8defe8bfe1b9c07b11a0d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9ebfd312cc5a3b7e07a6b5f7f208f18b = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_b7881ae2de837e535694d876830c75ab = $(`<div id="html_b7881ae2de837e535694d876830c75ab" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-34(south gate)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-09-04 09:06:48 &nbsp; <b>Lat/Lon:</b> 13.710801, 79.590887</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_9ebfd312cc5a3b7e07a6b5f7f208f18b.setContent(html_b7881ae2de837e535694d876830c75ab);
+            
+        
+
+        marker_47b9bfc65d394de8eba2a7b210dd829b.bindPopup(popup_9ebfd312cc5a3b7e07a6b5f7f208f18b)
+        ;
+
+        
+    
+    
+            marker_47b9bfc65d394de8eba2a7b210dd829b.bindTooltip(
+                `<div>
+                     <b>Dustbin-34(south gate)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_47b9bfc65d394de8eba2a7b210dd829b.setIcon(icon_621f21e08ab8defe8bfe1b9c07b11a0d);
+            
+    
+            var marker_a590289750fd7e25cae919813608c233 = L.marker(
+                [13.708564212483399, 79.59003412714452],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_08dc42bb420f44e61c70c4b64fe54994 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_348da733dfdc7b959d049935024da4bb = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_cb15dbd492d5ef3a9c0d06a3a6d94e71 = $(`<div id="html_cb15dbd492d5ef3a9c0d06a3a6d94e71" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-37(near to sports)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-09-04 09:18:19 &nbsp; <b>Lat/Lon:</b> 13.708564, 79.590034</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_348da733dfdc7b959d049935024da4bb.setContent(html_cb15dbd492d5ef3a9c0d06a3a6d94e71);
+            
+        
+
+        marker_a590289750fd7e25cae919813608c233.bindPopup(popup_348da733dfdc7b959d049935024da4bb)
+        ;
+
+        
+    
+    
+            marker_a590289750fd7e25cae919813608c233.bindTooltip(
+                `<div>
+                     <b>Dustbin-37(near to sports)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a590289750fd7e25cae919813608c233.setIcon(icon_08dc42bb420f44e61c70c4b64fe54994);
+            
+    
+            var marker_75484439b728d0e66684a41c5aebc75a = L.marker(
+                [13.708055000000002, 79.59268666666667],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_7be25b976c321c2d93602e38e108cd44 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f79dbf50219bb1d599a8ff4cacab4cbc = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_3970bfebf9bc500dc94b39245be26b59 = $(`<div id="html_3970bfebf9bc500dc94b39245be26b59" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-43(way of facility quarter)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-09-04 09:38:08 &nbsp; <b>Lat/Lon:</b> 13.708055, 79.592687</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_f79dbf50219bb1d599a8ff4cacab4cbc.setContent(html_3970bfebf9bc500dc94b39245be26b59);
+            
+        
+
+        marker_75484439b728d0e66684a41c5aebc75a.bindPopup(popup_f79dbf50219bb1d599a8ff4cacab4cbc)
+        ;
+
+        
+    
+    
+            marker_75484439b728d0e66684a41c5aebc75a.bindTooltip(
+                `<div>
+                     <b>Dustbin-43(way of facility quarter)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_75484439b728d0e66684a41c5aebc75a.setIcon(icon_7be25b976c321c2d93602e38e108cd44);
+            
+    
+            var marker_c21d57de78ef9444c9de7ba3e2b024fe = L.marker(
+                [13.712218699999998, 79.59282549999999],
+                {
+}
+            ).addTo(feature_group_9db691c24bbabe777b0fc4cb6ee06940);
+        
+    
+            var icon_204d1bf304de4f24aa98eb104235e91d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_92407d5d3ccdd19d1baf0b07ea474728 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_3f6ccf57abfdba8f8475cca8c83d26f9 = $(`<div id="html_3f6ccf57abfdba8f8475cca8c83d26f9" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#2e9e4f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-45(near to stp plant)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#2e9e4f;color:#fff;padding:1px 8px;border-radius:10px">Empty</span> &nbsp; <b>Note:</b> Empty<br><b>Time (UTC):</b> 2026-09-04 10:01:49 &nbsp; <b>Lat/Lon:</b> 13.712219, 79.592825</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_92407d5d3ccdd19d1baf0b07ea474728.setContent(html_3f6ccf57abfdba8f8475cca8c83d26f9);
+            
+        
+
+        marker_c21d57de78ef9444c9de7ba3e2b024fe.bindPopup(popup_92407d5d3ccdd19d1baf0b07ea474728)
+        ;
+
+        
+    
+    
+            marker_c21d57de78ef9444c9de7ba3e2b024fe.bindTooltip(
+                `<div>
+                     <b>Dustbin-45(near to stp plant)</b><br>Empty
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c21d57de78ef9444c9de7ba3e2b024fe.setIcon(icon_204d1bf304de4f24aa98eb104235e91d);
+            
+    
+            feature_group_9db691c24bbabe777b0fc4cb6ee06940.addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+        
+    
+            var feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_6855d2f7468fa09062cd0e43ceda11ab = L.marker(
+                [13.714001666666665, 79.58684833333334],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_67f386476714645071a23aae2378de55 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b546470d9a993bca72507f71011bf519 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_e3916b9797073c9d5bdbb715fe82b5ff = $(`<div id="html_e3916b9797073c9d5bdbb715fe82b5ff" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-13</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Little bit filled<br><b>Time (UTC):</b> 2026-08-30 12:50:28 &nbsp; <b>Lat/Lon:</b> 13.714002, 79.586848</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_b546470d9a993bca72507f71011bf519.setContent(html_e3916b9797073c9d5bdbb715fe82b5ff);
+            
+        
+
+        marker_6855d2f7468fa09062cd0e43ceda11ab.bindPopup(popup_b546470d9a993bca72507f71011bf519)
+        ;
+
+        
+    
+    
+            marker_6855d2f7468fa09062cd0e43ceda11ab.bindTooltip(
+                `<div>
+                     <b>Dustbin-13</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6855d2f7468fa09062cd0e43ceda11ab.setIcon(icon_67f386476714645071a23aae2378de55);
+            
+    
+            var marker_f80f20595a246e8baee78089c39ea005 = L.marker(
+                [13.712751666666664, 79.59176000000001],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_341ec152daef1d0e8703ba5679a90437 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f5964b00496c804e090a9ef8192b5708 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_58dbb80b67311a760f397184a26b17d9 = $(`<div id="html_58dbb80b67311a760f397184a26b17d9" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-17(near to circle)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Little bit filled<br><b>Time (UTC):</b> 2026-08-30 13:13:21 &nbsp; <b>Lat/Lon:</b> 13.712752, 79.591760</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_f5964b00496c804e090a9ef8192b5708.setContent(html_58dbb80b67311a760f397184a26b17d9);
+            
+        
+
+        marker_f80f20595a246e8baee78089c39ea005.bindPopup(popup_f5964b00496c804e090a9ef8192b5708)
+        ;
+
+        
+    
+    
+            marker_f80f20595a246e8baee78089c39ea005.bindTooltip(
+                `<div>
+                     <b>Dustbin-17(near to circle)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f80f20595a246e8baee78089c39ea005.setIcon(icon_341ec152daef1d0e8703ba5679a90437);
+            
+    
+            var marker_8c0c80d07f2f9c5d4301ecce52dd9108 = L.marker(
+                [13.714205000000002, 79.59015666666663],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_d5042176111cffebaca8c9ce62cac8b6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c7acced5af93b8b1c8b0e2af7d7eae20 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_ef398ece338b708a38db05d9971cdbd5 = $(`<div id="html_ef398ece338b708a38db05d9971cdbd5" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-18(main road to LHC)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Partially filled<br><b>Time (UTC):</b> 2026-08-30 13:18:11 &nbsp; <b>Lat/Lon:</b> 13.714205, 79.590157</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_c7acced5af93b8b1c8b0e2af7d7eae20.setContent(html_ef398ece338b708a38db05d9971cdbd5);
+            
+        
+
+        marker_8c0c80d07f2f9c5d4301ecce52dd9108.bindPopup(popup_c7acced5af93b8b1c8b0e2af7d7eae20)
+        ;
+
+        
+    
+    
+            marker_8c0c80d07f2f9c5d4301ecce52dd9108.bindTooltip(
+                `<div>
+                     <b>Dustbin-18(main road to LHC)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8c0c80d07f2f9c5d4301ecce52dd9108.setIcon(icon_d5042176111cffebaca8c9ce62cac8b6);
+            
+    
+            var marker_f48021e422faf3fc917da02bc4b55201 = L.marker(
+                [13.71446610325029, 79.58939606445198],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_4aa18e2abebb15433e5f001851a01e11 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a715b6527166fa0016c109578569584e = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_0f951c241c5923ecef8da139abff5111 = $(`<div id="html_0f951c241c5923ecef8da139abff5111" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-19(main road)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Little bit filled<br><b>Time (UTC):</b> 2026-08-30 13:20:44 &nbsp; <b>Lat/Lon:</b> 13.714466, 79.589396</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_a715b6527166fa0016c109578569584e.setContent(html_0f951c241c5923ecef8da139abff5111);
+            
+        
+
+        marker_f48021e422faf3fc917da02bc4b55201.bindPopup(popup_a715b6527166fa0016c109578569584e)
+        ;
+
+        
+    
+    
+            marker_f48021e422faf3fc917da02bc4b55201.bindTooltip(
+                `<div>
+                     <b>Dustbin-19(main road)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f48021e422faf3fc917da02bc4b55201.setIcon(icon_4aa18e2abebb15433e5f001851a01e11);
+            
+    
+            var marker_6e0dc7968d7bbc3072167ca497fb1a01 = L.marker(
+                [13.715503333333332, 79.588645],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_1a1b221c45fff34215d02e81eb03beec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_52e540f647eec5e551d571ed9d643096 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_69753c2ba207df88edc9aed84b0fa7bb = $(`<div id="html_69753c2ba207df88edc9aed84b0fa7bb" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-21(side of main road)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Little bit filled<br><b>Time (UTC):</b> 2026-08-30 13:24:36 &nbsp; <b>Lat/Lon:</b> 13.715503, 79.588645</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_52e540f647eec5e551d571ed9d643096.setContent(html_69753c2ba207df88edc9aed84b0fa7bb);
+            
+        
+
+        marker_6e0dc7968d7bbc3072167ca497fb1a01.bindPopup(popup_52e540f647eec5e551d571ed9d643096)
+        ;
+
+        
+    
+    
+            marker_6e0dc7968d7bbc3072167ca497fb1a01.bindTooltip(
+                `<div>
+                     <b>Dustbin-21(side of main road)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6e0dc7968d7bbc3072167ca497fb1a01.setIcon(icon_1a1b221c45fff34215d02e81eb03beec);
+            
+    
+            var marker_c3fa85115a3d027f0d766e93dbb790ad = L.marker(
+                [13.716474999999994, 79.5885183333333],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_975ed3bb66987271e95c7dbac434cf5e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d9cf73d9de4e57a9e6901a77b5bb8f05 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_dd3c86e824aa5235c65250e7fe5e5c4c = $(`<div id="html_dd3c86e824aa5235c65250e7fe5e5c4c" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-22(main road to mess road)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> 1/4 filled<br><b>Time (UTC):</b> 2026-08-30 13:27:16 &nbsp; <b>Lat/Lon:</b> 13.716475, 79.588518</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_d9cf73d9de4e57a9e6901a77b5bb8f05.setContent(html_dd3c86e824aa5235c65250e7fe5e5c4c);
+            
+        
+
+        marker_c3fa85115a3d027f0d766e93dbb790ad.bindPopup(popup_d9cf73d9de4e57a9e6901a77b5bb8f05)
+        ;
+
+        
+    
+    
+            marker_c3fa85115a3d027f0d766e93dbb790ad.bindTooltip(
+                `<div>
+                     <b>Dustbin-22(main road to mess road)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c3fa85115a3d027f0d766e93dbb790ad.setIcon(icon_975ed3bb66987271e95c7dbac434cf5e);
+            
+    
+            var marker_4bfb618a28dad66f0a0ee461ebcda402 = L.marker(
+                [13.711056666666662, 79.59233166666667],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_373371df9b28ee188c6550f5f14972fb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_507dead26eca2ac38ad9a52e572e2559 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_b82a2e5336f7af5dfda451e09fdc0ebf = $(`<div id="html_b82a2e5336f7af5dfda451e09fdc0ebf" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-23(near to circle)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Lightly filled<br><b>Time (UTC):</b> 2026-08-30 15:11:06 &nbsp; <b>Lat/Lon:</b> 13.711057, 79.592332</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_507dead26eca2ac38ad9a52e572e2559.setContent(html_b82a2e5336f7af5dfda451e09fdc0ebf);
+            
+        
+
+        marker_4bfb618a28dad66f0a0ee461ebcda402.bindPopup(popup_507dead26eca2ac38ad9a52e572e2559)
+        ;
+
+        
+    
+    
+            marker_4bfb618a28dad66f0a0ee461ebcda402.bindTooltip(
+                `<div>
+                     <b>Dustbin-23(near to circle)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4bfb618a28dad66f0a0ee461ebcda402.setIcon(icon_373371df9b28ee188c6550f5f14972fb);
+            
+    
+            var marker_1441b0b1c8b843f303076317e130d342 = L.marker(
+                [13.709476666666667, 79.59321333333334],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_424b451d4f7751c1795e51165599ac23 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4fee1a8b4b0c25b6c57f8cf67cf0da71 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_4bbb041f9de86706db3e60b9b04daa7a = $(`<div id="html_4bbb041f9de86706db3e60b9b04daa7a" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-27(near to ground)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Partially filled<br><b>Time (UTC):</b> 2026-08-30 15:19:40 &nbsp; <b>Lat/Lon:</b> 13.709477, 79.593213</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_4fee1a8b4b0c25b6c57f8cf67cf0da71.setContent(html_4bbb041f9de86706db3e60b9b04daa7a);
+            
+        
+
+        marker_1441b0b1c8b843f303076317e130d342.bindPopup(popup_4fee1a8b4b0c25b6c57f8cf67cf0da71)
+        ;
+
+        
+    
+    
+            marker_1441b0b1c8b843f303076317e130d342.bindTooltip(
+                `<div>
+                     <b>Dustbin-27(near to ground)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1441b0b1c8b843f303076317e130d342.setIcon(icon_424b451d4f7751c1795e51165599ac23);
+            
+    
+            var marker_ca229d2cb3e853a926a1216a9bc64735 = L.marker(
+                [13.708573819039062, 79.58967674828988],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_34a044a4adaffc863c1b2ffc7a166942 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f6443d9ec208608a1f1b064b0e0a2511 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_707c2314f40cefda91afc237bc7e02ae = $(`<div id="html_707c2314f40cefda91afc237bc7e02ae" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-30</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Partially filled<br><b>Time (UTC):</b> 2026-08-31 14:09:34 &nbsp; <b>Lat/Lon:</b> 13.708574, 79.589677</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_f6443d9ec208608a1f1b064b0e0a2511.setContent(html_707c2314f40cefda91afc237bc7e02ae);
+            
+        
+
+        marker_ca229d2cb3e853a926a1216a9bc64735.bindPopup(popup_f6443d9ec208608a1f1b064b0e0a2511)
+        ;
+
+        
+    
+    
+            marker_ca229d2cb3e853a926a1216a9bc64735.bindTooltip(
+                `<div>
+                     <b>Dustbin-30</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ca229d2cb3e853a926a1216a9bc64735.setIcon(icon_34a044a4adaffc863c1b2ffc7a166942);
+            
+    
+            var marker_99cb3129f2ca6a1061a7a26e19ffd540 = L.marker(
+                [13.708573819039062, 79.58967674828988],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_ee995deabaf751318b6729b81167dfd5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_42386f087a8536d221140ad6f45d4fe9 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_daf0427dd604b1193bbedc16017dc050 = $(`<div id="html_daf0427dd604b1193bbedc16017dc050" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-31(main gate)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Partially filled<br><b>Time (UTC):</b> 2026-08-31 14:12:28 &nbsp; <b>Lat/Lon:</b> 13.708574, 79.589677</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_42386f087a8536d221140ad6f45d4fe9.setContent(html_daf0427dd604b1193bbedc16017dc050);
+            
+        
+
+        marker_99cb3129f2ca6a1061a7a26e19ffd540.bindPopup(popup_42386f087a8536d221140ad6f45d4fe9)
+        ;
+
+        
+    
+    
+            marker_99cb3129f2ca6a1061a7a26e19ffd540.bindTooltip(
+                `<div>
+                     <b>Dustbin-31(main gate)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_99cb3129f2ca6a1061a7a26e19ffd540.setIcon(icon_ee995deabaf751318b6729b81167dfd5);
+            
+    
+            var marker_6fa8d855f5ef55d8e56c3ff320033654 = L.marker(
+                [13.708762997128424, 79.59097193859039],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_873851c5265a38d9510e8edd77d64dce = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7d9484cab9d5a12aa848290ab47a202b = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_61c1b7e5547fa523fcc3c89253819992 = $(`<div id="html_61c1b7e5547fa523fcc3c89253819992" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-38(in front of Sahana hostel)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Partially filled<br><b>Time (UTC):</b> 2026-09-04 09:21:10 &nbsp; <b>Lat/Lon:</b> 13.708763, 79.590972</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_7d9484cab9d5a12aa848290ab47a202b.setContent(html_61c1b7e5547fa523fcc3c89253819992);
+            
+        
+
+        marker_6fa8d855f5ef55d8e56c3ff320033654.bindPopup(popup_7d9484cab9d5a12aa848290ab47a202b)
+        ;
+
+        
+    
+    
+            marker_6fa8d855f5ef55d8e56c3ff320033654.bindTooltip(
+                `<div>
+                     <b>Dustbin-38(in front of Sahana hostel)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6fa8d855f5ef55d8e56c3ff320033654.setIcon(icon_873851c5265a38d9510e8edd77d64dce);
+            
+    
+            var marker_1202650d2cffcace677225b948c754de = L.marker(
+                [13.707349399999996, 79.5928943],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_c817871851392e4ee47b7c9c23e3823b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_276a04d355c89daedf8f48aded253bdc = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_3c5b3b1ec9f97c61f3aa50bb025a7342 = $(`<div id="html_3c5b3b1ec9f97c61f3aa50bb025a7342" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-38(near to frout shop)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Partially filled<br><b>Time (UTC):</b> 2026-09-04 09:31:59 &nbsp; <b>Lat/Lon:</b> 13.707349, 79.592894</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_276a04d355c89daedf8f48aded253bdc.setContent(html_3c5b3b1ec9f97c61f3aa50bb025a7342);
+            
+        
+
+        marker_1202650d2cffcace677225b948c754de.bindPopup(popup_276a04d355c89daedf8f48aded253bdc)
+        ;
+
+        
+    
+    
+            marker_1202650d2cffcace677225b948c754de.bindTooltip(
+                `<div>
+                     <b>Dustbin-38(near to frout shop)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1202650d2cffcace677225b948c754de.setIcon(icon_c817871851392e4ee47b7c9c23e3823b);
+            
+    
+            var marker_b62592f7a470c2f1395412d34a2e9282 = L.marker(
+                [13.707455000000001, 79.59291833333333],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_f4526b479732833e2c018445c6e0a88b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_77d88925def766af0d569a7de99e83e3 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_75a137338ac8205b065f5169126e99fb = $(`<div id="html_75a137338ac8205b065f5169126e99fb" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-40(near to frout shop)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Partially filled<br><b>Time (UTC):</b> 2026-09-04 09:33:57 &nbsp; <b>Lat/Lon:</b> 13.707455, 79.592918</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_77d88925def766af0d569a7de99e83e3.setContent(html_75a137338ac8205b065f5169126e99fb);
+            
+        
+
+        marker_b62592f7a470c2f1395412d34a2e9282.bindPopup(popup_77d88925def766af0d569a7de99e83e3)
+        ;
+
+        
+    
+    
+            marker_b62592f7a470c2f1395412d34a2e9282.bindTooltip(
+                `<div>
+                     <b>Dustbin-40(near to frout shop)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b62592f7a470c2f1395412d34a2e9282.setIcon(icon_f4526b479732833e2c018445c6e0a88b);
+            
+    
+            var marker_e307252336ec2d742f12fcc82ce446a0 = L.marker(
+                [13.707214999999998, 79.59280666666665],
+                {
+}
+            ).addTo(feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4);
+        
+    
+            var icon_2e674532875a7fdb838253e47391e252 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9eb2813055d0261c393acfa2180b86f8 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_d592cc5668a551b50a67936ef59a3501 = $(`<div id="html_d592cc5668a551b50a67936ef59a3501" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#f39c12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-42(near to frout shop)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#f39c12;color:#fff;padding:1px 8px;border-radius:10px">Partially filled</span> &nbsp; <b>Note:</b> Partially filled<br><b>Time (UTC):</b> 2026-09-04 09:35:55 &nbsp; <b>Lat/Lon:</b> 13.707215, 79.592807</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_9eb2813055d0261c393acfa2180b86f8.setContent(html_d592cc5668a551b50a67936ef59a3501);
+            
+        
+
+        marker_e307252336ec2d742f12fcc82ce446a0.bindPopup(popup_9eb2813055d0261c393acfa2180b86f8)
+        ;
+
+        
+    
+    
+            marker_e307252336ec2d742f12fcc82ce446a0.bindTooltip(
+                `<div>
+                     <b>Dustbin-42(near to frout shop)</b><br>Partially filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e307252336ec2d742f12fcc82ce446a0.setIcon(icon_2e674532875a7fdb838253e47391e252);
+            
+    
+            feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4.addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+        
+    
+            var feature_group_fcd514e4d867de357b8291f219993b7c = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_d82600370a0591ff4b7c6a05593d2c36 = L.marker(
+                [13.71220333333333, 79.58805666666667],
+                {
+}
+            ).addTo(feature_group_fcd514e4d867de357b8291f219993b7c);
+        
+    
+            var icon_87d2c1b0139de22a58d973098a387342 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5f30c41ccf88518e6543922ac912d4c6 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_017cd7d717b720f6993b3211924be332 = $(`<div id="html_017cd7d717b720f6993b3211924be332" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#d63e2a;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-15(near to visitor hostel)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#d63e2a;color:#fff;padding:1px 8px;border-radius:10px">Filled</span> &nbsp; <b>Note:</b> Filled<br><b>Time (UTC):</b> 2026-08-30 12:58:24 &nbsp; <b>Lat/Lon:</b> 13.712203, 79.588057</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_5f30c41ccf88518e6543922ac912d4c6.setContent(html_017cd7d717b720f6993b3211924be332);
+            
+        
+
+        marker_d82600370a0591ff4b7c6a05593d2c36.bindPopup(popup_5f30c41ccf88518e6543922ac912d4c6)
+        ;
+
+        
+    
+    
+            marker_d82600370a0591ff4b7c6a05593d2c36.bindTooltip(
+                `<div>
+                     <b>Dustbin-15(near to visitor hostel)</b><br>Filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d82600370a0591ff4b7c6a05593d2c36.setIcon(icon_87d2c1b0139de22a58d973098a387342);
+            
+    
+            var marker_fdbf8518c0e0e179d067fe84e0fa33c2 = L.marker(
+                [13.709873333333332, 79.59232666666665],
+                {
+}
+            ).addTo(feature_group_fcd514e4d867de357b8291f219993b7c);
+        
+    
+            var icon_5e1b2a7195ba9e69eeb50bc7707ea859 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a381bb1790b621927eed12ee7cc91b08 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_e04baf69eb45851b571624377fd12caf = $(`<div id="html_e04baf69eb45851b571624377fd12caf" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#d63e2a;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-24(backside of sports complex)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#d63e2a;color:#fff;padding:1px 8px;border-radius:10px">Filled</span> &nbsp; <b>Note:</b> Filled<br><b>Time (UTC):</b> 2026-08-30 15:14:44 &nbsp; <b>Lat/Lon:</b> 13.709873, 79.592327</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_a381bb1790b621927eed12ee7cc91b08.setContent(html_e04baf69eb45851b571624377fd12caf);
+            
+        
+
+        marker_fdbf8518c0e0e179d067fe84e0fa33c2.bindPopup(popup_a381bb1790b621927eed12ee7cc91b08)
+        ;
+
+        
+    
+    
+            marker_fdbf8518c0e0e179d067fe84e0fa33c2.bindTooltip(
+                `<div>
+                     <b>Dustbin-24(backside of sports complex)</b><br>Filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fdbf8518c0e0e179d067fe84e0fa33c2.setIcon(icon_5e1b2a7195ba9e69eeb50bc7707ea859);
+            
+    
+            var marker_e501c2c4d78d2f2cbf6856b8e032decd = L.marker(
+                [13.709766666666663, 79.59302499999998],
+                {
+}
+            ).addTo(feature_group_fcd514e4d867de357b8291f219993b7c);
+        
+    
+            var icon_90acc96298600b44d67ee51d4d09a7e9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_098d6920ce52fe0f69cf1850b3bacfe7 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_d9fff7b0f41ea55882e02f84d057c995 = $(`<div id="html_d9fff7b0f41ea55882e02f84d057c995" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#d63e2a;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-26(front of sports complex)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#d63e2a;color:#fff;padding:1px 8px;border-radius:10px">Filled</span> &nbsp; <b>Note:</b> Filled<br><b>Time (UTC):</b> 2026-08-30 15:18:42 &nbsp; <b>Lat/Lon:</b> 13.709767, 79.593025</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_098d6920ce52fe0f69cf1850b3bacfe7.setContent(html_d9fff7b0f41ea55882e02f84d057c995);
+            
+        
+
+        marker_e501c2c4d78d2f2cbf6856b8e032decd.bindPopup(popup_098d6920ce52fe0f69cf1850b3bacfe7)
+        ;
+
+        
+    
+    
+            marker_e501c2c4d78d2f2cbf6856b8e032decd.bindTooltip(
+                `<div>
+                     <b>Dustbin-26(front of sports complex)</b><br>Filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e501c2c4d78d2f2cbf6856b8e032decd.setIcon(icon_90acc96298600b44d67ee51d4d09a7e9);
+            
+    
+            var marker_c50d986880220385ebd528c0559c2465 = L.marker(
+                [13.706241986140368, 79.59377698402751],
+                {
+}
+            ).addTo(feature_group_fcd514e4d867de357b8291f219993b7c);
+        
+    
+            var icon_f14c325a6d32bfb0a736ea53f58822eb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d64314e23ea638f8a5319ada43b34e7b = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_fbd28507b03c71f37f110679808f55b1 = $(`<div id="html_fbd28507b03c71f37f110679808f55b1" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#d63e2a;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-29(in front acadmic building 1)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#d63e2a;color:#fff;padding:1px 8px;border-radius:10px">Filled</span> &nbsp; <b>Note:</b> Filled<br><b>Time (UTC):</b> 2026-08-31 14:01:46 &nbsp; <b>Lat/Lon:</b> 13.706242, 79.593777</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_d64314e23ea638f8a5319ada43b34e7b.setContent(html_fbd28507b03c71f37f110679808f55b1);
+            
+        
+
+        marker_c50d986880220385ebd528c0559c2465.bindPopup(popup_d64314e23ea638f8a5319ada43b34e7b)
+        ;
+
+        
+    
+    
+            marker_c50d986880220385ebd528c0559c2465.bindTooltip(
+                `<div>
+                     <b>Dustbin-29(in front acadmic building 1)</b><br>Filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c50d986880220385ebd528c0559c2465.setIcon(icon_f14c325a6d32bfb0a736ea53f58822eb);
+            
+    
+            var marker_6740bf70c068383bbaa30cc7a70ee0e8 = L.marker(
+                [13.710336702963492, 79.59076732518393],
+                {
+}
+            ).addTo(feature_group_fcd514e4d867de357b8291f219993b7c);
+        
+    
+            var icon_dc46b4216cbb5a7d504a14db8c9843b4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b254f30397ca74d1772ff598b7e070c6 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_a448132fccb74059d5dea1cd33e4bcc5 = $(`<div id="html_a448132fccb74059d5dea1cd33e4bcc5" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#d63e2a;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-33(in front of tc1)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#d63e2a;color:#fff;padding:1px 8px;border-radius:10px">Filled</span> &nbsp; <b>Note:</b> Filled<br><b>Time (UTC):</b> 2026-09-04 09:04:47 &nbsp; <b>Lat/Lon:</b> 13.710337, 79.590767</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_b254f30397ca74d1772ff598b7e070c6.setContent(html_a448132fccb74059d5dea1cd33e4bcc5);
+            
+        
+
+        marker_6740bf70c068383bbaa30cc7a70ee0e8.bindPopup(popup_b254f30397ca74d1772ff598b7e070c6)
+        ;
+
+        
+    
+    
+            marker_6740bf70c068383bbaa30cc7a70ee0e8.bindTooltip(
+                `<div>
+                     <b>Dustbin-33(in front of tc1)</b><br>Filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6740bf70c068383bbaa30cc7a70ee0e8.setIcon(icon_dc46b4216cbb5a7d504a14db8c9843b4);
+            
+    
+            var marker_ddbd86ba1de8f753d804a07ca0306e57 = L.marker(
+                [13.710038527930747, 79.5908355296527],
+                {
+}
+            ).addTo(feature_group_fcd514e4d867de357b8291f219993b7c);
+        
+    
+            var icon_8ec57ac7694e6d4ba55ab3341b77e2eb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5b54220c6a589bfb4ca57362c4d51eec = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_76b474b0ef4d89c37e67b48043374fc5 = $(`<div id="html_76b474b0ef4d89c37e67b48043374fc5" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#d63e2a;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-35(backside of South mess)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#d63e2a;color:#fff;padding:1px 8px;border-radius:10px">Filled</span> &nbsp; <b>Note:</b> Filled<br><b>Time (UTC):</b> 2026-09-04 09:12:37 &nbsp; <b>Lat/Lon:</b> 13.710039, 79.590836</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_5b54220c6a589bfb4ca57362c4d51eec.setContent(html_76b474b0ef4d89c37e67b48043374fc5);
+            
+        
+
+        marker_ddbd86ba1de8f753d804a07ca0306e57.bindPopup(popup_5b54220c6a589bfb4ca57362c4d51eec)
+        ;
+
+        
+    
+    
+            marker_ddbd86ba1de8f753d804a07ca0306e57.bindTooltip(
+                `<div>
+                     <b>Dustbin-35(backside of South mess)</b><br>Filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ddbd86ba1de8f753d804a07ca0306e57.setIcon(icon_8ec57ac7694e6d4ba55ab3341b77e2eb);
+            
+    
+            var marker_724fa5b9dc5a9d1b72a7a4de9e720265 = L.marker(
+                [13.708564212483399, 79.59003412714452],
+                {
+}
+            ).addTo(feature_group_fcd514e4d867de357b8291f219993b7c);
+        
+    
+            var icon_0b000b65a61fb826935efece7ed24a4e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_921296c5a4d95e0d0d2d9f95d7724742 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_e28f187c2c9e66ffb9db25dd38ccf840 = $(`<div id="html_e28f187c2c9e66ffb9db25dd38ccf840" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#d63e2a;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-36(south cafe area)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#d63e2a;color:#fff;padding:1px 8px;border-radius:10px">Filled</span> &nbsp; <b>Note:</b> Filled<br><b>Time (UTC):</b> 2026-09-04 09:15:17 &nbsp; <b>Lat/Lon:</b> 13.708564, 79.590034</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_921296c5a4d95e0d0d2d9f95d7724742.setContent(html_e28f187c2c9e66ffb9db25dd38ccf840);
+            
+        
+
+        marker_724fa5b9dc5a9d1b72a7a4de9e720265.bindPopup(popup_921296c5a4d95e0d0d2d9f95d7724742)
+        ;
+
+        
+    
+    
+            marker_724fa5b9dc5a9d1b72a7a4de9e720265.bindTooltip(
+                `<div>
+                     <b>Dustbin-36(south cafe area)</b><br>Filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_724fa5b9dc5a9d1b72a7a4de9e720265.setIcon(icon_0b000b65a61fb826935efece7ed24a4e);
+            
+    
+            var marker_1658001b0cc8b0279010e66e17aab0e9 = L.marker(
+                [13.707384999999997, 79.59290666666668],
+                {
+}
+            ).addTo(feature_group_fcd514e4d867de357b8291f219993b7c);
+        
+    
+            var icon_31440de207d14de03487d73e0978adb1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_734ceb1ad073c10f4722ac09d1920622 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_e6a94a8e142833f6026a216cf0d16b56 = $(`<div id="html_e6a94a8e142833f6026a216cf0d16b56" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#d63e2a;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-39(near to frout shop)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#d63e2a;color:#fff;padding:1px 8px;border-radius:10px">Filled</span> &nbsp; <b>Note:</b> Filled<br><b>Time (UTC):</b> 2026-09-04 09:33:07 &nbsp; <b>Lat/Lon:</b> 13.707385, 79.592907</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_734ceb1ad073c10f4722ac09d1920622.setContent(html_e6a94a8e142833f6026a216cf0d16b56);
+            
+        
+
+        marker_1658001b0cc8b0279010e66e17aab0e9.bindPopup(popup_734ceb1ad073c10f4722ac09d1920622)
+        ;
+
+        
+    
+    
+            marker_1658001b0cc8b0279010e66e17aab0e9.bindTooltip(
+                `<div>
+                     <b>Dustbin-39(near to frout shop)</b><br>Filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1658001b0cc8b0279010e66e17aab0e9.setIcon(icon_31440de207d14de03487d73e0978adb1);
+            
+    
+            var marker_968dfd5a0d2b59b4a58db7f200425fe9 = L.marker(
+                [13.707388333333332, 79.59298166666665],
+                {
+}
+            ).addTo(feature_group_fcd514e4d867de357b8291f219993b7c);
+        
+    
+            var icon_a1788faf47f4991ec9cdfabd17ca8260 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_66af5caecc53b187c17aa2ab8a514876 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_96bd93ee5744da796afee0fec242a272 = $(`<div id="html_96bd93ee5744da796afee0fec242a272" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#d63e2a;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-41(near to frout shop)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#d63e2a;color:#fff;padding:1px 8px;border-radius:10px">Filled</span> &nbsp; <b>Note:</b> Filled<br><b>Time (UTC):</b> 2026-09-04 09:34:49 &nbsp; <b>Lat/Lon:</b> 13.707388, 79.592982</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_66af5caecc53b187c17aa2ab8a514876.setContent(html_96bd93ee5744da796afee0fec242a272);
+            
+        
+
+        marker_968dfd5a0d2b59b4a58db7f200425fe9.bindPopup(popup_66af5caecc53b187c17aa2ab8a514876)
+        ;
+
+        
+    
+    
+            marker_968dfd5a0d2b59b4a58db7f200425fe9.bindTooltip(
+                `<div>
+                     <b>Dustbin-41(near to frout shop)</b><br>Filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_968dfd5a0d2b59b4a58db7f200425fe9.setIcon(icon_a1788faf47f4991ec9cdfabd17ca8260);
+            
+    
+            var marker_1d6b6fe98cf3f985f7518b2428631dc7 = L.marker(
+                [13.713606666666664, 79.59363333333336],
+                {
+}
+            ).addTo(feature_group_fcd514e4d867de357b8291f219993b7c);
+        
+    
+            var icon_d591ad6678e5e423a543711cb1cc45ce = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_34d55f8dc4414e2805d64316cea35429 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_c3bdb422e23f795ba84249c686f0286e = $(`<div id="html_c3bdb422e23f795ba84249c686f0286e" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#d63e2a;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-44(near to admin block)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#d63e2a;color:#fff;padding:1px 8px;border-radius:10px">Filled</span> &nbsp; <b>Note:</b> Filled<br><b>Time (UTC):</b> 2026-09-04 09:57:43 &nbsp; <b>Lat/Lon:</b> 13.713607, 79.593633</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_34d55f8dc4414e2805d64316cea35429.setContent(html_c3bdb422e23f795ba84249c686f0286e);
+            
+        
+
+        marker_1d6b6fe98cf3f985f7518b2428631dc7.bindPopup(popup_34d55f8dc4414e2805d64316cea35429)
+        ;
+
+        
+    
+    
+            marker_1d6b6fe98cf3f985f7518b2428631dc7.bindTooltip(
+                `<div>
+                     <b>Dustbin-44(near to admin block)</b><br>Filled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1d6b6fe98cf3f985f7518b2428631dc7.setIcon(icon_d591ad6678e5e423a543711cb1cc45ce);
+            
+    
+            feature_group_fcd514e4d867de357b8291f219993b7c.addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+        
+    
+            var feature_group_8de757d6954e525b3c5bfc69d94cdc24 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_89371b98f9c9e3ba8716a285ec1358ef = L.marker(
+                [13.716906666666668, 79.58684833333334],
+                {
+}
+            ).addTo(feature_group_8de757d6954e525b3c5bfc69d94cdc24);
+        
+    
+            var icon_12ea16cea19c5dd07c0a19618508b797 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b2cf53a863d4a0fc59920c8b4d6467ba = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_a2db4b1eb873b672649c2f87c8e18155 = $(`<div id="html_a2db4b1eb873b672649c2f87c8e18155" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7b1d12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-1 (north mess )</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7b1d12;color:#fff;padding:1px 8px;border-radius:10px">Overfilled</span> &nbsp; <b>Note:</b> Sometimes over filled<br><b>Time (UTC):</b> 2026-08-29 12:50:36 &nbsp; <b>Lat/Lon:</b> 13.716907, 79.586848</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_b2cf53a863d4a0fc59920c8b4d6467ba.setContent(html_a2db4b1eb873b672649c2f87c8e18155);
+            
+        
+
+        marker_89371b98f9c9e3ba8716a285ec1358ef.bindPopup(popup_b2cf53a863d4a0fc59920c8b4d6467ba)
+        ;
+
+        
+    
+    
+            marker_89371b98f9c9e3ba8716a285ec1358ef.bindTooltip(
+                `<div>
+                     <b>Dustbin-1 (north mess )</b><br>Overfilled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_89371b98f9c9e3ba8716a285ec1358ef.setIcon(icon_12ea16cea19c5dd07c0a19618508b797);
+            
+    
+            var marker_22b3fe82c5302ce45383f36992b137e0 = L.marker(
+                [13.717141666666665, 79.58719166666667],
+                {
+}
+            ).addTo(feature_group_8de757d6954e525b3c5bfc69d94cdc24);
+        
+    
+            var icon_188df2f8afb732920b47c5e2dc5f575d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c0af9a80b1122ce2fffad4a6dc4ee444 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_ba252439d83b91aa01efb2ead461456c = $(`<div id="html_ba252439d83b91aa01efb2ead461456c" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7b1d12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Between north mess and Malhar hostel</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7b1d12;color:#fff;padding:1px 8px;border-radius:10px">Overfilled</span> &nbsp; <b>Note:</b> Sometimes over filled<br><b>Time (UTC):</b> 2026-08-29 12:53:24 &nbsp; <b>Lat/Lon:</b> 13.717142, 79.587192</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_c0af9a80b1122ce2fffad4a6dc4ee444.setContent(html_ba252439d83b91aa01efb2ead461456c);
+            
+        
+
+        marker_22b3fe82c5302ce45383f36992b137e0.bindPopup(popup_c0af9a80b1122ce2fffad4a6dc4ee444)
+        ;
+
+        
+    
+    
+            marker_22b3fe82c5302ce45383f36992b137e0.bindTooltip(
+                `<div>
+                     <b>Between north mess and Malhar hostel</b><br>Overfilled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_22b3fe82c5302ce45383f36992b137e0.setIcon(icon_188df2f8afb732920b47c5e2dc5f575d);
+            
+    
+            var marker_abac9190c1a873d34e5001f9fc3b5937 = L.marker(
+                [13.717366666666662, 79.58648999999997],
+                {
+}
+            ).addTo(feature_group_8de757d6954e525b3c5bfc69d94cdc24);
+        
+    
+            var icon_63af91d1f1c20dc87de3078d70e3b1cb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ce05ce4ce8616e2fc1f9a5a2b9bac0cf = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_2e2856ff266aa7f17189f0d8a1dee2e1 = $(`<div id="html_2e2856ff266aa7f17189f0d8a1dee2e1" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7b1d12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-5</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7b1d12;color:#fff;padding:1px 8px;border-radius:10px">Overfilled</span> &nbsp; <b>Note:</b> Overfilled<br><b>Time (UTC):</b> 2026-08-29 12:59:59 &nbsp; <b>Lat/Lon:</b> 13.717367, 79.586490</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_ce05ce4ce8616e2fc1f9a5a2b9bac0cf.setContent(html_2e2856ff266aa7f17189f0d8a1dee2e1);
+            
+        
+
+        marker_abac9190c1a873d34e5001f9fc3b5937.bindPopup(popup_ce05ce4ce8616e2fc1f9a5a2b9bac0cf)
+        ;
+
+        
+    
+    
+            marker_abac9190c1a873d34e5001f9fc3b5937.bindTooltip(
+                `<div>
+                     <b>Dustbin-5</b><br>Overfilled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_abac9190c1a873d34e5001f9fc3b5937.setIcon(icon_63af91d1f1c20dc87de3078d70e3b1cb);
+            
+    
+            var marker_d896781f4650d8ef4e995f77f2826881 = L.marker(
+                [13.717720000000002, 79.58743499999999],
+                {
+}
+            ).addTo(feature_group_8de757d6954e525b3c5bfc69d94cdc24);
+        
+    
+            var icon_1dde2b9e632c160783a47d5d85e558e4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_351367f9c7c735354733eb63ab9c6ddd = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_5f9048ca31ae73ee777f8f04797c0f22 = $(`<div id="html_5f9048ca31ae73ee777f8f04797c0f22" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7b1d12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin -7(In front of Malhar)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7b1d12;color:#fff;padding:1px 8px;border-radius:10px">Overfilled</span> &nbsp; <b>Note:</b> Overfilled<br><b>Time (UTC):</b> 2026-08-29 13:07:22 &nbsp; <b>Lat/Lon:</b> 13.717720, 79.587435</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_351367f9c7c735354733eb63ab9c6ddd.setContent(html_5f9048ca31ae73ee777f8f04797c0f22);
+            
+        
+
+        marker_d896781f4650d8ef4e995f77f2826881.bindPopup(popup_351367f9c7c735354733eb63ab9c6ddd)
+        ;
+
+        
+    
+    
+            marker_d896781f4650d8ef4e995f77f2826881.bindTooltip(
+                `<div>
+                     <b>Dustbin -7(In front of Malhar)</b><br>Overfilled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d896781f4650d8ef4e995f77f2826881.setIcon(icon_1dde2b9e632c160783a47d5d85e558e4);
+            
+    
+            var marker_7ea9976cb51e87323d5ae414a19fb618 = L.marker(
+                [13.714606666666667, 79.58613333333332],
+                {
+}
+            ).addTo(feature_group_8de757d6954e525b3c5bfc69d94cdc24);
+        
+    
+            var icon_10526ae73d36854bf7c97dff3fad077f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d1303be556e1315a0ab0cf389ad00dcc = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_4c2b7bd7decb367fc20115ffc1fd9b13 = $(`<div id="html_4c2b7bd7decb367fc20115ffc1fd9b13" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7b1d12;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-11(Near to court-01)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7b1d12;color:#fff;padding:1px 8px;border-radius:10px">Overfilled</span> &nbsp; <b>Note:</b> Overfilled<br><b>Time (UTC):</b> 2026-08-30 12:42:42 &nbsp; <b>Lat/Lon:</b> 13.714607, 79.586133</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_d1303be556e1315a0ab0cf389ad00dcc.setContent(html_4c2b7bd7decb367fc20115ffc1fd9b13);
+            
+        
+
+        marker_7ea9976cb51e87323d5ae414a19fb618.bindPopup(popup_d1303be556e1315a0ab0cf389ad00dcc)
+        ;
+
+        
+    
+    
+            marker_7ea9976cb51e87323d5ae414a19fb618.bindTooltip(
+                `<div>
+                     <b>Dustbin-11(Near to court-01)</b><br>Overfilled
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7ea9976cb51e87323d5ae414a19fb618.setIcon(icon_10526ae73d36854bf7c97dff3fad077f);
+            
+    
+            feature_group_8de757d6954e525b3c5bfc69d94cdc24.addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+        
+    
+            var feature_group_b21da1d4f027ede594147c0a19baf6ec = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_ac22270e4d200ee9e231f613ab1abdc7 = L.marker(
+                [13.717588333333333, 79.58696166666667],
+                {
+}
+            ).addTo(feature_group_b21da1d4f027ede594147c0a19baf6ec);
+        
+    
+            var icon_4f70c57baa07d4d2c0e1ccf2b06ab2de = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d3d850edcc0968885a58c39dbe18b7b9 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_fc50f609e2cc02354f8df792ed9f02c2 = $(`<div id="html_fc50f609e2cc02354f8df792ed9f02c2" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7f7f7f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Between Des to mess (Bin- 3)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7f7f7f;color:#fff;padding:1px 8px;border-radius:10px">Not recorded</span> &nbsp; <b>Note:</b> -<br><b>Time (UTC):</b> 2026-08-29 12:55:34 &nbsp; <b>Lat/Lon:</b> 13.717588, 79.586962</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_d3d850edcc0968885a58c39dbe18b7b9.setContent(html_fc50f609e2cc02354f8df792ed9f02c2);
+            
+        
+
+        marker_ac22270e4d200ee9e231f613ab1abdc7.bindPopup(popup_d3d850edcc0968885a58c39dbe18b7b9)
+        ;
+
+        
+    
+    
+            marker_ac22270e4d200ee9e231f613ab1abdc7.bindTooltip(
+                `<div>
+                     <b>Between Des to mess (Bin- 3)</b><br>Not recorded
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ac22270e4d200ee9e231f613ab1abdc7.setIcon(icon_4f70c57baa07d4d2c0e1ccf2b06ab2de);
+            
+    
+            var marker_7873034b52f02c671ef9513239b814b3 = L.marker(
+                [13.717654999999999, 79.58682333333333],
+                {
+}
+            ).addTo(feature_group_b21da1d4f027ede594147c0a19baf6ec);
+        
+    
+            var icon_1ef782941aa7c7ac9e321e248b2ae8e9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dc1cf9a6f10acdbb3b83494da0bb1832 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_f5d5e9b5382e5b7b9f37bd97254a7e0f = $(`<div id="html_f5d5e9b5382e5b7b9f37bd97254a7e0f" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7f7f7f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-4(near to Des)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7f7f7f;color:#fff;padding:1px 8px;border-radius:10px">Not recorded</span> &nbsp; <b>Note:</b> -<br><b>Time (UTC):</b> 2026-08-29 12:57:49 &nbsp; <b>Lat/Lon:</b> 13.717655, 79.586823</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_dc1cf9a6f10acdbb3b83494da0bb1832.setContent(html_f5d5e9b5382e5b7b9f37bd97254a7e0f);
+            
+        
+
+        marker_7873034b52f02c671ef9513239b814b3.bindPopup(popup_dc1cf9a6f10acdbb3b83494da0bb1832)
+        ;
+
+        
+    
+    
+            marker_7873034b52f02c671ef9513239b814b3.bindTooltip(
+                `<div>
+                     <b>Dustbin-4(near to Des)</b><br>Not recorded
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7873034b52f02c671ef9513239b814b3.setIcon(icon_1ef782941aa7c7ac9e321e248b2ae8e9);
+            
+    
+            var marker_456273ed54c16ece4350ea107a554a8a = L.marker(
+                [13.71798, 79.58715333333333],
+                {
+}
+            ).addTo(feature_group_b21da1d4f027ede594147c0a19baf6ec);
+        
+    
+            var icon_56e49e8fca084bd775bef422c06fa5a0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a0148bec5bc1c3beb86543e14acfc5d2 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_e9f5e4249b57e8a2941ae121d9866fa0 = $(`<div id="html_e9f5e4249b57e8a2941ae121d9866fa0" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7f7f7f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin -6</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7f7f7f;color:#fff;padding:1px 8px;border-radius:10px">Not recorded</span> &nbsp; <b>Note:</b> -<br><b>Time (UTC):</b> 2026-08-29 13:05:22 &nbsp; <b>Lat/Lon:</b> 13.717980, 79.587153</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_a0148bec5bc1c3beb86543e14acfc5d2.setContent(html_e9f5e4249b57e8a2941ae121d9866fa0);
+            
+        
+
+        marker_456273ed54c16ece4350ea107a554a8a.bindPopup(popup_a0148bec5bc1c3beb86543e14acfc5d2)
+        ;
+
+        
+    
+    
+            marker_456273ed54c16ece4350ea107a554a8a.bindTooltip(
+                `<div>
+                     <b>Dustbin -6</b><br>Not recorded
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_456273ed54c16ece4350ea107a554a8a.setIcon(icon_56e49e8fca084bd775bef422c06fa5a0);
+            
+    
+            var marker_a7e01136083776791db72b4e9d0edc0d = L.marker(
+                [13.716514999999996, 79.58611166666667],
+                {
+}
+            ).addTo(feature_group_b21da1d4f027ede594147c0a19baf6ec);
+        
+    
+            var icon_9d6e5af6521b7a4634fb94ab58452d5a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ec88188a0ace54ad5f8429f4a4b4b751 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_e3988f74deb297339c061fe92edda679 = $(`<div id="html_e3988f74deb297339c061fe92edda679" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7f7f7f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-8(Backside of North mess)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7f7f7f;color:#fff;padding:1px 8px;border-radius:10px">Not recorded</span> &nbsp; <b>Note:</b> -<br><b>Time (UTC):</b> 2026-08-30 12:31:54 &nbsp; <b>Lat/Lon:</b> 13.716515, 79.586112</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_ec88188a0ace54ad5f8429f4a4b4b751.setContent(html_e3988f74deb297339c061fe92edda679);
+            
+        
+
+        marker_a7e01136083776791db72b4e9d0edc0d.bindPopup(popup_ec88188a0ace54ad5f8429f4a4b4b751)
+        ;
+
+        
+    
+    
+            marker_a7e01136083776791db72b4e9d0edc0d.bindTooltip(
+                `<div>
+                     <b>Dustbin-8(Backside of North mess)</b><br>Not recorded
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a7e01136083776791db72b4e9d0edc0d.setIcon(icon_9d6e5af6521b7a4634fb94ab58452d5a);
+            
+    
+            var marker_d43dd5b2c3de21b779be60d71f6d17f8 = L.marker(
+                [13.714816666666668, 79.586215],
+                {
+}
+            ).addTo(feature_group_b21da1d4f027ede594147c0a19baf6ec);
+        
+    
+            var icon_7e94d5e94fd22915ee88f51bf3c42fed = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_52675d886f9d220973c83f69210b58f1 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_bb7169e7948339645cf07bc7682f35bb = $(`<div id="html_bb7169e7948339645cf07bc7682f35bb" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7f7f7f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Sports Utility Building</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7f7f7f;color:#fff;padding:1px 8px;border-radius:10px">Not recorded</span> &nbsp; <b>Note:</b> -<br><b>Time (UTC):</b> 2026-08-30 12:37:32 &nbsp; <b>Lat/Lon:</b> 13.714817, 79.586215</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_52675d886f9d220973c83f69210b58f1.setContent(html_bb7169e7948339645cf07bc7682f35bb);
+            
+        
+
+        marker_d43dd5b2c3de21b779be60d71f6d17f8.bindPopup(popup_52675d886f9d220973c83f69210b58f1)
+        ;
+
+        
+    
+    
+            marker_d43dd5b2c3de21b779be60d71f6d17f8.bindTooltip(
+                `<div>
+                     <b>Sports Utility Building</b><br>Not recorded
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d43dd5b2c3de21b779be60d71f6d17f8.setIcon(icon_7e94d5e94fd22915ee88f51bf3c42fed);
+            
+    
+            var marker_0d9c39454794bcc88122d9c829204f23 = L.marker(
+                [13.713956666666661, 79.58682333333333],
+                {
+}
+            ).addTo(feature_group_b21da1d4f027ede594147c0a19baf6ec);
+        
+    
+            var icon_03b5ba276366ef307c2f913213c22341 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b93f6df6074323177a91be9c2ababf05 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_546f2468882843b0a5cb113e0cdb9f7a = $(`<div id="html_546f2468882843b0a5cb113e0cdb9f7a" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7f7f7f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Untitled</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7f7f7f;color:#fff;padding:1px 8px;border-radius:10px">Not recorded</span> &nbsp; <b>Note:</b> -<br><b>Time (UTC):</b> 2026-08-30 12:50:07 &nbsp; <b>Lat/Lon:</b> 13.713957, 79.586823</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_b93f6df6074323177a91be9c2ababf05.setContent(html_546f2468882843b0a5cb113e0cdb9f7a);
+            
+        
+
+        marker_0d9c39454794bcc88122d9c829204f23.bindPopup(popup_b93f6df6074323177a91be9c2ababf05)
+        ;
+
+        
+    
+    
+            marker_0d9c39454794bcc88122d9c829204f23.bindTooltip(
+                `<div>
+                     <b>Untitled</b><br>Not recorded
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0d9c39454794bcc88122d9c829204f23.setIcon(icon_03b5ba276366ef307c2f913213c22341);
+            
+    
+            var marker_a568eca40c17b307fcb30602c7d8e765 = L.marker(
+                [13.711895, 79.59153333333333],
+                {
+}
+            ).addTo(feature_group_b21da1d4f027ede594147c0a19baf6ec);
+        
+    
+            var icon_c8208f8dbb3822eee85ab0cbd3f216fa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5946396ac7b6652073d8827547f12194 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_6b1c971980a01b9b36571ba35f22f6e4 = $(`<div id="html_6b1c971980a01b9b36571ba35f22f6e4" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7f7f7f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-16(Near to circle)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7f7f7f;color:#fff;padding:1px 8px;border-radius:10px">Not recorded</span> &nbsp; <b>Note:</b> -<br><b>Time (UTC):</b> 2026-08-30 13:11:02 &nbsp; <b>Lat/Lon:</b> 13.711895, 79.591533</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_5946396ac7b6652073d8827547f12194.setContent(html_6b1c971980a01b9b36571ba35f22f6e4);
+            
+        
+
+        marker_a568eca40c17b307fcb30602c7d8e765.bindPopup(popup_5946396ac7b6652073d8827547f12194)
+        ;
+
+        
+    
+    
+            marker_a568eca40c17b307fcb30602c7d8e765.bindTooltip(
+                `<div>
+                     <b>Dustbin-16(Near to circle)</b><br>Not recorded
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a568eca40c17b307fcb30602c7d8e765.setIcon(icon_c8208f8dbb3822eee85ab0cbd3f216fa);
+            
+    
+            var marker_d806404288d91ad21d17618cf04c9f40 = L.marker(
+                [13.714985, 79.58929666666667],
+                {
+}
+            ).addTo(feature_group_b21da1d4f027ede594147c0a19baf6ec);
+        
+    
+            var icon_04f733e70f3fcdde7dea1cab357c7519 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_351609579399701525fa7f0491073f19 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_c06107bb91ada6a9abe82da0283f97e8 = $(`<div id="html_c06107bb91ada6a9abe82da0283f97e8" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7f7f7f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Dustbin-20(near to main road to acadmic building)</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7f7f7f;color:#fff;padding:1px 8px;border-radius:10px">Not recorded</span> &nbsp; <b>Note:</b> -<br><b>Time (UTC):</b> 2026-08-30 13:22:42 &nbsp; <b>Lat/Lon:</b> 13.714985, 79.589297</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_351609579399701525fa7f0491073f19.setContent(html_c06107bb91ada6a9abe82da0283f97e8);
+            
+        
+
+        marker_d806404288d91ad21d17618cf04c9f40.bindPopup(popup_351609579399701525fa7f0491073f19)
+        ;
+
+        
+    
+    
+            marker_d806404288d91ad21d17618cf04c9f40.bindTooltip(
+                `<div>
+                     <b>Dustbin-20(near to main road to acadmic building)</b><br>Not recorded
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d806404288d91ad21d17618cf04c9f40.setIcon(icon_04f733e70f3fcdde7dea1cab357c7519);
+            
+    
+            var marker_b254b32c9daed9e43f0926cb230ab5b3 = L.marker(
+                [13.710353268231986, 79.5915687276922],
+                {
+}
+            ).addTo(feature_group_b21da1d4f027ede594147c0a19baf6ec);
+        
+    
+            var icon_b3be609a9cb085976777aaf17767fd02 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a65fa9e4257031689701c025a73a5192 = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_e5e0b889296919f39bc88e563a814eb4 = $(`<div id="html_e5e0b889296919f39bc88e563a814eb4" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7f7f7f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Untitled</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7f7f7f;color:#fff;padding:1px 8px;border-radius:10px">Not recorded</span> &nbsp; <b>Note:</b> -<br><b>Time (UTC):</b> 2026-09-04 08:47:01 &nbsp; <b>Lat/Lon:</b> 13.710353, 79.591569</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_a65fa9e4257031689701c025a73a5192.setContent(html_e5e0b889296919f39bc88e563a814eb4);
+            
+        
+
+        marker_b254b32c9daed9e43f0926cb230ab5b3.bindPopup(popup_a65fa9e4257031689701c025a73a5192)
+        ;
+
+        
+    
+    
+            marker_b254b32c9daed9e43f0926cb230ab5b3.bindTooltip(
+                `<div>
+                     <b>Untitled</b><br>Not recorded
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b254b32c9daed9e43f0926cb230ab5b3.setIcon(icon_b3be609a9cb085976777aaf17767fd02);
+            
+    
+            var marker_97b2376a7ede4a70ba3ca4f38df4cb3c = L.marker(
+                [13.707213333333334, 79.59281833333333],
+                {
+}
+            ).addTo(feature_group_b21da1d4f027ede594147c0a19baf6ec);
+        
+    
+            var icon_a8209eb1f34e8dd0a34c3a51f44a74db = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "trash",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_76ad65e670b3b2756ceac1075ad5697a = L.popup({
+  "maxWidth": 520,
+});
+
+        
+            
+                var html_346e85d5ace0f584a0eb8eb65d0a7145 = $(`<div id="html_346e85d5ace0f584a0eb8eb65d0a7145" style="width: 100.0%; height: 100.0%;"><div style="font-family:Arial,sans-serif;width:480px;max-width:80vw"><div style="background:#7f7f7f;color:#fff;padding:6px 8px;border-radius:6px 6px 0 0;font-weight:bold">Untitled</div><div style="font-size:12px;margin-top:4px"><b>Status:</b> <span style="background:#7f7f7f;color:#fff;padding:1px 8px;border-radius:10px">Not recorded</span> &nbsp; <b>Note:</b> -<br><b>Time (UTC):</b> 2026-09-04 09:30:06 &nbsp; <b>Lat/Lon:</b> 13.707213, 79.592818</div><i style="color:#888">No photograph available</i></div></div>`)[0];
+                popup_76ad65e670b3b2756ceac1075ad5697a.setContent(html_346e85d5ace0f584a0eb8eb65d0a7145);
+            
+        
+
+        marker_97b2376a7ede4a70ba3ca4f38df4cb3c.bindPopup(popup_76ad65e670b3b2756ceac1075ad5697a)
+        ;
+
+        
+    
+    
+            marker_97b2376a7ede4a70ba3ca4f38df4cb3c.bindTooltip(
+                `<div>
+                     <b>Untitled</b><br>Not recorded
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_97b2376a7ede4a70ba3ca4f38df4cb3c.setIcon(icon_a8209eb1f34e8dd0a34c3a51f44a74db);
+            
+    
+            feature_group_b21da1d4f027ede594147c0a19baf6ec.addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+        
+    
+            map_19db07f4e46dd912cf0aa80c0c073398.fitBounds(
+                [[13.716906666666668, 79.58684833333334], [13.717141666666665, 79.58719166666667], [13.717588333333333, 79.58696166666667], [13.717654999999999, 79.58682333333333], [13.717366666666662, 79.58648999999997], [13.71798, 79.58715333333333], [13.717720000000002, 79.58743499999999], [13.716514999999996, 79.58611166666667], [13.714816666666668, 79.586215], [13.714663333333332, 79.58644166666666], [13.714606666666667, 79.58613333333332], [13.714460000000003, 79.58601833333334], [13.714191666666665, 79.58606833333333], [13.714006666666666, 79.58610833333334], [13.713956666666661, 79.58682333333333], [13.714001666666665, 79.58684833333334], [13.712784999999997, 79.58811333333333], [13.71220333333333, 79.58805666666667], [13.711895, 79.59153333333333], [13.712751666666664, 79.59176000000001], [13.714205000000002, 79.59015666666663], [13.71446610325029, 79.58939606445198], [13.714985, 79.58929666666667], [13.715503333333332, 79.588645], [13.716474999999994, 79.5885183333333], [13.711056666666662, 79.59233166666667], [13.709873333333332, 79.59232666666665], [13.710048333333335, 79.59321166666668], [13.709766666666663, 79.59302499999998], [13.709476666666667, 79.59321333333334], [13.70677444336461, 79.59340810652772], [13.706241986140368, 79.59377698402751], [13.708573819039062, 79.58967674828988], [13.708573819039062, 79.58967674828988], [13.716903333333333, 79.59161999999998], [13.710353268231986, 79.5915687276922], [13.710336702963492, 79.59076732518393], [13.710800530039728, 79.5908866830043], [13.710038527930747, 79.5908355296527], [13.708564212483399, 79.59003412714452], [13.708564212483399, 79.59003412714452], [13.708762997128424, 79.59097193859039], [13.707213333333334, 79.59281833333333], [13.707349399999996, 79.5928943], [13.707384999999997, 79.59290666666668], [13.707455000000001, 79.59291833333333], [13.707388333333332, 79.59298166666665], [13.707214999999998, 79.59280666666665], [13.708055000000002, 79.59268666666667], [13.713606666666664, 79.59363333333336], [13.712218699999998, 79.59282549999999]],
+                {"padding": [30, 30]}
+            );
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topleft",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+        
+    
+            var tile_layer_ab9a607591e6504acc5b57dfe7216812 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_05f2833d2155b734f5023f42716444d3 = new L.Control.MiniMap(
+                tile_layer_ab9a607591e6504acc5b57dfe7216812,
+                {
+  "position": "bottomleft",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": true,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_19db07f4e46dd912cf0aa80c0c073398.addControl(mini_map_05f2833d2155b734f5023f42716444d3);
+        
+    
+            var measure_control_53d97983f1dade3092989bd954cefa45 = new L.Control.Measure(
+                {
+  "position": "topright",
+  "primaryLengthUnit": "meters",
+  "secondaryLengthUnit": "miles",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "acres",
+});
+            map_19db07f4e46dd912cf0aa80c0c073398.addControl(measure_control_53d97983f1dade3092989bd954cefa45);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+            var mouse_position_e1e606fa16a3a89c84e06ffe1966304d = new L.Control.MousePosition(
+                {
+  "position": "bottomright",
+  "separator": " : ",
+  "emptyString": "Unavailable",
+  "lngFirst": false,
+  "numDigits": 5,
+  "prefix": "",
+}
+            );
+            mouse_position_e1e606fa16a3a89c84e06ffe1966304d.options["latFormatter"] =
+                undefined;
+            mouse_position_e1e606fa16a3a89c84e06ffe1966304d.options["lngFormatter"] =
+                undefined;
+            map_19db07f4e46dd912cf0aa80c0c073398.addControl(mouse_position_e1e606fa16a3a89c84e06ffe1966304d);
+        
+    
+            var heat_map_9167554a1a09df88d42e2f6a1e3bf87c = L.heatLayer(
+                [[13.716906666666668, 79.58684833333334], [13.717141666666665, 79.58719166666667], [13.717588333333333, 79.58696166666667], [13.717654999999999, 79.58682333333333], [13.717366666666662, 79.58648999999997], [13.71798, 79.58715333333333], [13.717720000000002, 79.58743499999999], [13.716514999999996, 79.58611166666667], [13.714816666666668, 79.586215], [13.714663333333332, 79.58644166666666], [13.714606666666667, 79.58613333333332], [13.714460000000003, 79.58601833333334], [13.714191666666665, 79.58606833333333], [13.714006666666666, 79.58610833333334], [13.713956666666661, 79.58682333333333], [13.714001666666665, 79.58684833333334], [13.712784999999997, 79.58811333333333], [13.71220333333333, 79.58805666666667], [13.711895, 79.59153333333333], [13.712751666666664, 79.59176000000001], [13.714205000000002, 79.59015666666663], [13.71446610325029, 79.58939606445198], [13.714985, 79.58929666666667], [13.715503333333332, 79.588645], [13.716474999999994, 79.5885183333333], [13.711056666666662, 79.59233166666667], [13.709873333333332, 79.59232666666665], [13.710048333333335, 79.59321166666668], [13.709766666666663, 79.59302499999998], [13.709476666666667, 79.59321333333334], [13.70677444336461, 79.59340810652772], [13.706241986140368, 79.59377698402751], [13.708573819039062, 79.58967674828988], [13.708573819039062, 79.58967674828988], [13.716903333333333, 79.59161999999998], [13.710353268231986, 79.5915687276922], [13.710336702963492, 79.59076732518393], [13.710800530039728, 79.5908866830043], [13.710038527930747, 79.5908355296527], [13.708564212483399, 79.59003412714452], [13.708564212483399, 79.59003412714452], [13.708762997128424, 79.59097193859039], [13.707213333333334, 79.59281833333333], [13.707349399999996, 79.5928943], [13.707384999999997, 79.59290666666668], [13.707455000000001, 79.59291833333333], [13.707388333333332, 79.59298166666665], [13.707214999999998, 79.59280666666665], [13.708055000000002, 79.59268666666667], [13.713606666666664, 79.59363333333336], [13.712218699999998, 79.59282549999999]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 25,
+  "blur": 15,
+}
+            );
+        
+    
+            var layer_control_d3b35d407574c19760a0b0afd8080de0_layers = {
+                base_layers : {
+                    "OpenStreetMap" : tile_layer_1c93375e8a014716b492a05961e5dca3,
+                    "Light (CartoDB)" : tile_layer_707db0f9041d6b6e705d8ce8a176cd70,
+                    "Satellite (Esri)" : tile_layer_1ce67564c4110453ce41c263f622931f,
+                },
+                overlays :  {
+                    "Empty (12)" : feature_group_9db691c24bbabe777b0fc4cb6ee06940,
+                    "Partially filled (14)" : feature_group_fbb3ddb23e5d0e9cedbab1047c90f6f4,
+                    "Filled (10)" : feature_group_fcd514e4d867de357b8291f219993b7c,
+                    "Overfilled (5)" : feature_group_8de757d6954e525b3c5bfc69d94cdc24,
+                    "Not recorded (10)" : feature_group_b21da1d4f027ede594147c0a19baf6ec,
+                    "Density heatmap" : heat_map_9167554a1a09df88d42e2f6a1e3bf87c,
+                },
+            };
+            let layer_control_d3b35d407574c19760a0b0afd8080de0 = L.control.layers(
+                layer_control_d3b35d407574c19760a0b0afd8080de0_layers.base_layers,
+                layer_control_d3b35d407574c19760a0b0afd8080de0_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_19db07f4e46dd912cf0aa80c0c073398);
+
+        
+</script>
+</html>
